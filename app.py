@@ -28,7 +28,7 @@ def retTime(code, page):
 def retFine(code, page):
 
     ko = (page*1000)-1000
-    request = requests.get('https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Violations_Moving_2023/MapServer/4/query?where=ISSUING_AGENCY_CODE%3D%27' + code + '%27&outFields=*&outSR=4326&resultOffset='+str(ko) +'&f=json')
+    request = requests.get('https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Violations_Moving_2023/MapServer/4/query?where=ISSUING_AGENCY_CODE%3D' + code + '&outFields=*&outSR=4326&resultOffset='+str(ko) +'&f=json')
     bo = request.json()
     return bo
 

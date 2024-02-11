@@ -14,30 +14,21 @@ def hello_world(page):
     return request2.json()
 
 
-@app.route('/issue_time/<string:issue_time>/<int:page>')
-def retTime(issue_time, page):
+@app.route('/violation/<string:code>/<int:page>')
+def retTime(code, page):
 
     
     ko = (page*1000)-1000
-    request = requests.get('https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Violations_Moving_2023/MapServer/4/query?where=ISSUE_TIME%3D%27' + issue_time + '%27&outFields=*&outSR=4326&resultOffset='+str(ko) +'&f=json')
+    request = requests.get('https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Violations_Moving_2023/MapServer/4/query?where=VIOLATION_CODE%3D%27' + code + '%27&outFields=*&outSR=4326&resultOffset='+str(ko) +'&f=json')
     bo = request.json()
     return bo
     
 
-
-@app.route('/fine/<string:fine_amount>/<int:page>')
-def retFine(fine_amount, page):
+@app.route('/agency/<string:code>/<int:page>')
+def retFine(code, page):
 
     ko = (page*1000)-1000
-    request = requests.get('https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Violations_Moving_2023/MapServer/4/query?where=FINE_AMOUNT%3D%27' + fine_amount + '%27&outFields=*&outSR=4326&resultOffset='+str(ko) +'&f=json')
-    bo = request.json()
-    return bo
-    
-
-@app.route('/total/<string:total>/<int:page>')
-def retTotal(total, page):
-    ko = (page*1000)-1000
-    request = requests.get('https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Violations_Moving_2023/MapServer/4/query?where=TOTAL_PAID%3D%27' + total + '%27&outFields=*&outSR=4326&resultOffset='+str(ko) +'&f=json')
+    request = requests.get('https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Violations_Moving_2023/MapServer/4/query?where=ISSUING_AGENCY_CODE%3D%27' + code + '%27&outFields=*&outSR=4326&resultOffset='+str(ko) +'&f=json')
     bo = request.json()
     return bo
 
